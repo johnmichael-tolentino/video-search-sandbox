@@ -1,7 +1,7 @@
 import React from 'react';
 
 class SearchBar extends React.Component {
-	// Initialize our state.
+	// Initialize our state that will accept the user's search.
 	state = { search: '' };
 
 	// Callback method for form.
@@ -18,7 +18,7 @@ class SearchBar extends React.Component {
 			<div className="search-bar ui segment">
 				<form className="ui form" onSubmit={this.onFormSubmit}>
 					<div className="field">
-						<label>Search a video!</label>
+						<label>Search a Video</label>
 						<input
 							type="text"
 							value={this.state.search}
