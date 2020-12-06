@@ -8,13 +8,13 @@ const VideoDetail = ({ video }) => {
 
 	// Destructured video objects.
 	const { videoId } = video.id;
-	const { title, channeID, description, thumbnails } = video.snippet;
+	const { title, description } = video.snippet;
 
 	const videoSrc = `https://www.youtube.com/embed/${videoId}`;
 	return (
 		<div>
 			<div className="ui embed">
-				<iframe src={videoSrc} />
+				<iframe title="Video Player" src={videoSrc} />
 			</div>
 			<div className="ui segment">
 				<h4 className="ui header">{title}</h4>

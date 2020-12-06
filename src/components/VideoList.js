@@ -5,7 +5,7 @@ import VideoItem from './VideoItem';
 const VideoList = ({ videos, onSelect }) => {
 	// Map through videos array and return a VideoItem component that will be passed video data as props for each video.
 	const renderedList = videos.map((video) => {
-		return <VideoItem video={video} onSelect={onSelect} />;
+		return <VideoItem key={video.id.videoId} video={video} onSelect={onSelect} />;
 	});
 	return <div className="ui relaxed divided list">{renderedList}</div>;
 };

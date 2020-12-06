@@ -10,6 +10,11 @@ class App extends React.Component {
 
 	state = { videos: [], selectedVideo: null };
 
+	// Sets a default search for when users open the application.
+	componentDidMount() {
+		this.onSearch('how to code');
+	}
+
 	// Callback passed as prop in SearchBar.
 	// When invoked, it's passed a search term which will be used with Youtube API.
 	// The returned response will be set as the App's state and passed as a prop.
@@ -23,7 +28,11 @@ class App extends React.Component {
 		});
 
 		// The state gets updated with an array of the fetched results.
-		this.setState({ videos: response.data.items });
+		// State for VideoDetail is set to render as the first video from VideoList.
+		this.setState({
+			videos: response.data.items,
+			selectedVideo: response.data.items[0],
+		});
 	};
 
 	// When a user clicks on a VideoItem, the selectedVideo state property gets updated to that VideoItem, which will be passed to VideoDetail
@@ -36,10 +45,16 @@ class App extends React.Component {
 			<div className="ui container">
 				{/* Callback passed as prop to SearchBar */}
 				<SearchBar onSearch={this.onSearch} />
-				<VideoDetail video={this.state.selectedVideo} />
-				<VideoList videos={this.state.videos} onSelect={this.onSelect}>
-					<VideoItem />
-				</VideoList>
+				<div className="ui grid">
+					<div className="ui row">
+						<div className="eleven wide column">
+							<VideoDetail video={this.state.selectedVideo} />
+						</div>
+						<div className="five wide column">
+							<VideoList videos={this.state.videos} onSelect={this.onSelect} />
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}

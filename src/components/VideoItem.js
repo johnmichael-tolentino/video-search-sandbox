@@ -3,7 +3,7 @@ import React from 'react';
 
 const VideoItem = ({ video, onSelect }) => {
 	// Destructured values from video object.
-	const { title, channeID, description, thumbnails } = video.snippet;
+	const { title, thumbnails } = video.snippet;
 
 	return (
 		<div
@@ -11,7 +11,7 @@ const VideoItem = ({ video, onSelect }) => {
 			onClick={() => {
 				onSelect(video);
 			}}>
-			<img src={thumbnails.medium.url} className="ui image" />
+			<img alt={title} src={thumbnails.medium.url} className="ui image" />
 			<div className="content">
 				<div className="header">{title}</div>
 			</div>
