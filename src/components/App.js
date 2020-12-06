@@ -6,8 +6,9 @@ import VideoDetail from './VideoDetail';
 import youtube from '../api/youtube';
 
 class App extends React.Component {
-	// Initialize our state.
-	state = { video: [] };
+	// Initialize our states.
+
+	state = { videos: [], selectedVideo: null };
 
 	// Callback passed as prop in SearchBar.
 	// When invoked, it's passed a search term which will be used with Youtube API.
@@ -22,7 +23,12 @@ class App extends React.Component {
 		});
 
 		// The state gets updated with an array of the fetched results.
-		this.setState({ video: response.data.items });
+		this.setState({ videos: response.data.items });
+	};
+
+	// When a user clicks on a VideoItem, the selectedVideo state property gets updated to that VideoItem, which will be passed to VideoDetail
+	onSelect = (video) => {
+		this.setState({ selectedVideo: video });
 	};
 
 	render() {
@@ -30,10 +36,8 @@ class App extends React.Component {
 			<div className="ui container">
 				{/* Callback passed as prop to SearchBar */}
 				<SearchBar onSearch={this.onSearch} />
-				<VideoDetail />
-				<VideoList>
-					<VideoItem />
-					<VideoItem />
+				<VideoDetail video={this.state.selectedVideo} />
+				<VideoList videos={this.state.videos} onSelect={this.onSelect}>
 					<VideoItem />
 				</VideoList>
 			</div>
